@@ -3,7 +3,6 @@ package com.hsm.controlles;
 import com.hsm.ProductService;
 import com.hsm.data.ProductsData;
 import com.hsm.models.ProductModel;
-import com.hsm.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,15 +23,19 @@ public class ProductsController {
     public String getProducts(Model model){
 
         List<ProductsData> products = productService.getAllProducts();
+        List<ProductModel> productModelList = getNecessary(products);
+        model.addAttribute("productList", productModelList);
 
+        return "index.jsp";
+    }
+
+    private List<ProductModel> getNecessary(List<ProductsData> products) {
         List<ProductModel> productList = new ArrayList<>();
 
         for (ProductsData product: products){
             productList.add(new ProductModel(product.getImage(), product.getName(), product.getPrice()));
         }
 
-        model.addAttribute("productList", products);
-
-        return "index.jsp";
+        return productList;
     }
 }
