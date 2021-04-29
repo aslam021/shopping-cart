@@ -33,7 +33,7 @@ public class ProductsController {
         List<ProductsData> products = productService.getAllProducts();
         List<ProductModel> productModelList = getNecessary(products);
         model.addAttribute("productList", productModelList);
-
+        model.addAttribute("customer", SpringBootWebApplication.loggedInUser);
         return "index.jsp";
     }
 
@@ -41,9 +41,14 @@ public class ProductsController {
         List<ProductModel> productList = new ArrayList<>();
 
         for (ProductsData product: products){
-            productList.add(new ProductModel(product.getImage(), product.getName(), product.getPrice()));
+            productList.add(new ProductModel(product.getProduct_id() ,product.getImage(), product.getName(), product.getPrice()));
         }
 
         return productList;
+    }
+
+    @PostMapping
+    public void test(){
+        return;
     }
 }
