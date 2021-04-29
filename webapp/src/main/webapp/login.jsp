@@ -16,7 +16,9 @@
 </head>
 <body>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp" >
+    <jsp:param name="customer" value="${customer}" />
+</jsp:include>
 
 <div  class="d-flex justify-content-center text-center w-25 m-auto pt-3">
 

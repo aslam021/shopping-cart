@@ -1,4 +1,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" %>
+<script src="static/js/jquery-3.6.0.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        const notLoggedIn = document.getElementById("notLoggedIn");
+        const loggedIn = document.getElementById("loggedIn");
+
+        if ('${customer}' == "") {
+            notLoggedIn.style.display = "block";
+            loggedIn.style.display = "none";
+        } else {
+            notLoggedIn.style.display = "none";
+            loggedIn.style.display = "block";
+        }
+    });
+</script>
 
 <div class="bg-dark" style="height: 120px;">
     <div class=container>
@@ -10,21 +27,18 @@
                 <div class="float-end mt-4 pt-3">
                     <div class="login-container">
 
-                        <button
-                                name="Login"
-                                class="btn btn-outline-success"
-                                onclick="location.href ='login'"
-                        >Login</button>
+                        <div id="notLoggedIn">
+                            <button name="Login" class="btn btn-outline-success"
+                                    onclick="location.href ='login'">Login</button>
+                            <button name="Register" class="btn btn-success">Register</button>
+                        </div>
 
-                        <button name="Register" class="btn btn-success">Register</button>
+                        <div id="loggedIn">
+                            <button name="cart" class="btn btn-success"
+                                    onclick="location.href ='cart'">Cart</button>
+                            <button name="logout" class="btn btn-outline-success">Logout</button>
+                        </div>
 
-<%--                        <form action="#" action="/login" method="post" object="login">--%>
-<%--                            <div class="row">--%>
-<%--                                <input class="col-5" type="text" placeholder="Email" name="email">--%>
-<%--                                <input class="col-4" type="text" placeholder="Password" name="password">--%>
-<%--                                <button class="btn btn-outline-success col-3" type="submit">Login</button>--%>
-<%--                            </div>--%>
-<%--                        </form>--%>
                     </div>
                     <div>dont have an account?</div>
                 </div>

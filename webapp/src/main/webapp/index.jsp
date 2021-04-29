@@ -33,7 +33,9 @@
 
 
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp" >
+    <jsp:param name="customer" value="${customer}" />
+</jsp:include>
 <div class="container" style="min-height:20em; padding: 1em;">
     <table class="table table-hover">
         <tbody>

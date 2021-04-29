@@ -6,6 +6,7 @@ import com.hsm.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,4 +26,11 @@ public class CartServiceImp implements CartService {
             cartRepository.save(new CartData(customer_id, product_id));
         }
     }
+
+    @Override
+    public List<CartData> getProductsInCart(long customerId) {
+        List<CartData> cartData = cartRepository.findByCustomerId(customerId);
+        return cartData;
+    }
+
 }
