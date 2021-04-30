@@ -24,6 +24,7 @@ public class LoginController {
     public String displayLogin(Model model){
         LoginModel loginModel = new LoginModel();
         model.addAttribute(loginModel);
+        model.addAttribute("page", "login");
         return "login.jsp";
     }
 
@@ -33,12 +34,17 @@ public class LoginController {
 
         if (user.isPresent()){
             SpringBootWebApplication.loggedInUser = user.get();
-        }
-
-        try {
-            response.sendRedirect("products");
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                response.sendRedirect("products");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                response.sendRedirect("login");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

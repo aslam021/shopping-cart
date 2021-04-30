@@ -28,6 +28,7 @@
 
 <jsp:include page="header.jsp" >
     <jsp:param name="customer" value="${customer}" />
+    <jsp:param name="cart" value="${cart}" />
 </jsp:include>
 
 <div class="container">

@@ -32,6 +32,7 @@ public class CartController {
 
         model.addAttribute("productList", productModelList);
         model.addAttribute("customer", customerData);
+        model.addAttribute("page", "cart");
 
         return "cart.jsp";
     }

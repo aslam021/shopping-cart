@@ -1,5 +1,6 @@
 package com.hsm;
 
+import com.hsm.data.AdminData;
 import com.hsm.data.CustomerData;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +11,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class SpringBootWebApplication extends SpringBootServletInitializer {
 
     public static CustomerData loggedInUser = null;
+    public static AdminData loggedInAdmin = null;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
