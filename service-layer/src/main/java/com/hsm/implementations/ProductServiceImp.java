@@ -24,4 +24,9 @@ public class ProductServiceImp implements ProductService {
     public Optional<ProductsData> getById(long productId) {
         return productsRepository.findById(productId);
     }
+
+    @Override
+    public ProductsData addNewProduct(ProductsData productsData) {
+        return productsRepository.save(productsData);
+    }
 }

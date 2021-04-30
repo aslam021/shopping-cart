@@ -14,6 +14,11 @@
         } else {
             notLoggedIn.style.display = "none";
             loggedIn.style.display = "block";
+
+            if ('${page}' == "addProduct"){
+                document.getElementById("addNew").style.display = "none";
+                document.getElementById("viewProducts").style.display = "block";
+            }
         }
     });
 </script>
@@ -22,6 +27,8 @@
     <div class=container>
         <div class="row align-items-center">
             <div class="col-6">
+                <button name="addProducts" class="btn btn-success mt-5" id="viewProducts" style="display: none"
+                        onclick="location.href ='products/addNew'">View products</button>
                 <%--                <img class="h-75 w-auto mt-3 ml-4" src="img/logo.png">--%>
             </div>
             <div class="col-6">
@@ -33,13 +40,12 @@
                         </div>
 
                         <div id="loggedIn">
-                            <button name="viewProducts" class="btn btn-success"
-                                    onclick="location.href ='viewProducts'">Products</button>
+                            <button name="addProducts" class="btn btn-success" id="addNew"
+                                    onclick="location.href ='products/addNew'">Add New Product</button>
                             <button name="logout" class="btn btn-outline-success">Logout</button>
                         </div>
 
                     </div>
-                    <div>dont have an account?</div>
                 </div>
                 </form>
             </div>
