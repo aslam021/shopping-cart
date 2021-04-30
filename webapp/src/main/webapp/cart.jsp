@@ -14,6 +14,15 @@
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <script src="static/js/jquery-3.6.0.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function countUpdated(){
+            let prevCount = document.getElementById("productCount");
+
+            console.log(prevCount.value);
+
+        };
+    </script>
 </head>
 <body>
 
@@ -48,7 +57,8 @@
                                 </div>
                             </div></td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="email" class="form-control" id="exampleInputEmail1" value="${product.count}">
+                            <input type="number" class="form-control" id="productCount"
+                                   value="${product.count}" oninput="countUpdated()">
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$${product.price}</strong></td>
                         <c:set var="total" value="${product.count * product.price}" />
