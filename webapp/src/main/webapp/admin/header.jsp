@@ -15,12 +15,20 @@
             notLoggedIn.style.display = "none";
             loggedIn.style.display = "block";
 
-            if ('${page}' == "addProduct"){
+            if ('${page}' == "addProduct" || '${page}' == "updateProduct"){
                 document.getElementById("addNew").style.display = "none";
                 document.getElementById("viewProducts").style.display = "block";
             }
         }
     });
+
+    function goBack(){
+        if ('${page}' == "addProduct"){
+            window.location.href = "/webapp_war/admin/products";
+        } else {
+            history.back();
+        }
+    }
 </script>
 
 <div class="bg-dark" style="height: 120px;">
@@ -28,7 +36,7 @@
         <div class="row align-items-center">
             <div class="col-6">
                 <button name="addProducts" class="btn btn-success mt-5" id="viewProducts" style="display: none"
-                        onclick="location.href ='products/addNew'">View products</button>
+                        onclick="goBack()">View products</button>
                 <%--                <img class="h-75 w-auto mt-3 ml-4" src="img/logo.png">--%>
             </div>
             <div class="col-6">

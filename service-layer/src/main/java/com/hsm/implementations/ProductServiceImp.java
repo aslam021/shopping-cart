@@ -29,4 +29,26 @@ public class ProductServiceImp implements ProductService {
     public ProductsData addNewProduct(ProductsData productsData) {
         return productsRepository.save(productsData);
     }
+
+    @Override
+    public void updateProduct(ProductsData productsData, long productId) {
+
+        productsData.setProduct_id(productId);
+        if (productsData.getImage().equals("")){
+            productsData = getProductWithExistingImageAdded(productsData, productId);
+        }
+
+        productsRepository.save(productsData);
+    }
+
+    private ProductsData getProductWithExistingImageAdded(ProductsData productsData, long productId) {
+        Optional<ProductsData> existingProductData = productsRepository.findById(productId);
+        productsData.setImage(existingProductData.get().getImage());
+        return productsData;
+    }
+
+    @Override
+    public void deleteProduct(long product_id) {
+        productsRepository.deleteById(product_id);
+    }
 }

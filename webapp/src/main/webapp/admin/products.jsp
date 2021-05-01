@@ -10,10 +10,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>My cart</title>
+    <title>Products</title>
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <script src="../static/js/jquery-3.6.0.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function deleteProduct(productId){
+            $.ajax({
+                type: 'DELETE',
+                data: {productId: productId},
+                url: 'products',
+                success: function (result){
+                    window.alert("deleted");
+                    window.location.href = "products";
+                }});
+        }
+    </script>
 </head>
 <body>
 
@@ -48,13 +61,15 @@
                             </div></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>${product.count}</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$${product.price}</strong></td>
-                        <td class="col-sm-1 col-md-1 text-center"><strong>$${product.discount}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${product.discount}%</strong></td>
                         <td class="col-sm-1 col-md-1 align-items-center align-middle">
-                            <button type="button" class="btn btn-outline-danger m-2">
+                            <button type="button" class="btn btn-outline-danger m-2"
+                                    onclick="location.href ='products/update/${product.product_id}'">
                                 <span class="glyphicon glyphicon-remove"></span> Update
                             </button>
-                            <button type="button" class="btn btn-danger m-2 mt-0">
-                                <span class="glyphicon glyphicon-remove"></span> Remove
+                            <button type="button" class="btn btn-danger m-2 mt-0"
+                                    onclick="deleteProduct(${product.product_id})">
+                                <span class="glyphicon glyphicon-remove"></span> Delete
                             </button>
                         </td>
                     </tr>
