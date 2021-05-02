@@ -6,10 +6,12 @@ import com.hsm.repositories.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CartServiceImp implements CartService {
 
     @Autowired
@@ -31,6 +33,11 @@ public class CartServiceImp implements CartService {
     public List<CartData> getProductsInCart(long customerId) {
         List<CartData> cartData = cartRepository.findByCustomerId(customerId);
         return cartData;
+    }
+
+    @Override
+    public void removeFromCart(long customerId, long productId) {
+        cartRepository.deleteByCustomerIdAndProductId(customerId, productId);
     }
 
 }

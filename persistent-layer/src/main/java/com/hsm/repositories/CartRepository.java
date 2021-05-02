@@ -10,4 +10,5 @@ import java.util.List;
 public interface CartRepository extends CrudRepository<CartData, Long> {
     CartData findByCustomerIdAndProductId(long customer_id, long product_id);
     List<CartData> findByCustomerId(long customer_id);
+    void deleteByCustomerIdAndProductId(long customer_id, long product_id);
 }

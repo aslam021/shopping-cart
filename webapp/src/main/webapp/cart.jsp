@@ -16,6 +16,18 @@
     <script src="static/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+        function removeProduct(customerId, productId) {
+            $.ajax({
+                type: 'DELETE',
+                data: {customerId: customerId, productId: productId},
+                url: "cart",
+                success: function () {
+                    window.alert("removed");
+                    window.location.href = "cart";
+                }
+            });
+        }
+
         function countUpdated(){
             let prevCount = document.getElementById("productCount");
 
@@ -66,7 +78,7 @@
                         <td class="col-sm-1 col-md-1 text-center"><strong>$${total}</strong></td>
                         <c:set var="subTotal" value="${subTotal + total}" />
                         <td class="col-sm-1 col-md-1">
-                            <button type="button" class="btn btn-danger">
+                            <button type="button" class="btn btn-danger" onclick="removeProduct(${customer.customer_id}, ${product.product_id})">
                                 <span class="glyphicon glyphicon-remove"></span> Remove
                             </button></td>
                     </tr>

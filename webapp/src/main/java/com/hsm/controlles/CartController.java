@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,5 +58,12 @@ public class CartController {
     @ResponseBody
     public void addToCart(@RequestParam String product_id, @RequestParam String customer_id){
         cartService.addToCart(product_id, customer_id);
+    }
+
+    @DeleteMapping
+    public void removeFromCart(@RequestParam String customerId, @RequestParam String productId,
+                               HttpServletResponse response){
+        cartService.removeFromCart(Long.parseLong(customerId), Long.parseLong(productId));
+        return;
     }
 }
