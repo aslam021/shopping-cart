@@ -60,6 +60,13 @@ public class CartController {
         cartService.addToCart(product_id, customer_id);
     }
 
+    @PutMapping
+    public void updateQuantity(@RequestParam String customerId, @RequestParam String productId,
+                               @RequestParam String productCount, HttpServletResponse response) {
+        cartService.updateCount(Long.parseLong(customerId), Long.parseLong(productId), Integer.parseInt(productCount));
+        return;
+    }
+
     @DeleteMapping
     public void removeFromCart(@RequestParam String customerId, @RequestParam String productId,
                                HttpServletResponse response){

@@ -40,4 +40,11 @@ public class CartServiceImp implements CartService {
         cartRepository.deleteByCustomerIdAndProductId(customerId, productId);
     }
 
+    @Override
+    public void updateCount(long customerId, long productId, int productCount) {
+        CartData cartData = cartRepository.findByCustomerIdAndProductId(customerId, productId);
+        cartRepository.save(new CartData(cartData.getCart_id(), cartData.getCustomerId(), cartData.getProductId(), productCount));
+        return;
+    }
+
 }

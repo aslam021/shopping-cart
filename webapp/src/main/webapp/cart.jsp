@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
@@ -28,12 +29,31 @@
             });
         }
 
-        function countUpdated(){
-            let prevCount = document.getElementById("productCount");
+        // let productCount;
+        function countValueChanged(){
+            console.log(document.getElementById("productCount").value);
+        }
 
-            console.log(prevCount.value);
-
+        function countUpdated(customerId, productId, productCount){
+            console.log(productCount);
+            $.ajax({
+                type: 'PUT',
+                data: {customerId: customerId, productId: productId, productCount: productCount},
+                url: "cart",
+                success: function () {
+                    window.alert("updated");
+                    window.location.href = "cart";
+                }
+            });
         };
+
+        function purchased(total){
+            window.alert("Thank you for shopping with us\n\n" +
+                "-------------------------------\n" +
+                "Total: $" + Math.round(total * 100) / 100 + "\n" +
+                "-------------------------------"
+            );
+        }
     </script>
 </head>
 <body>
@@ -70,11 +90,17 @@
                                 </div>
                             </div></td>
                         <td class="col-sm-1 col-md-1" style="text-align: center">
-                            <input type="number" class="form-control" id="productCount"
-                                   value="${product.count}" oninput="countUpdated()">
+                            <input type="number" class="form-control" id="productCount-${product.name}"
+                                   value="${product.count}" oninput="countValueChanged()">
+                            <button class="btn btn-sm btn-outline-dark"
+                                    onclick="countUpdated(${customer.customer_id}, ${product.product_id},
+                                            document.getElementById('productCount-${product.name}').value)">Update</button>
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$${product.price}</strong></td>
                         <c:set var="total" value="${product.count * product.price}" />
+<%--                        <c:set var="total">--%>
+<%--                            <fmt:formatNumber type = "number" minFractionDigits="1" maxFractionDigits = "2" value = "9500" />--%>
+<%--                        </c:set>--%>
                         <td class="col-sm-1 col-md-1 text-center"><strong>$${total}</strong></td>
                         <c:set var="subTotal" value="${subTotal + total}" />
                         <td class="col-sm-1 col-md-1">
@@ -114,11 +140,11 @@
                     <td>   </td>
                     <td>   </td>
                     <td>
-                        <button type="button" class="btn btn-default">
+                        <button type="button" class="btn btn-default" onclick="document.location.href='products'">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                         </button></td>
                     <td>
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="btn btn-success" onclick="purchased('${total}')">
                             Checkout <span class="glyphicon glyphicon-play"></span>
                         </button></td>
                 </tr>

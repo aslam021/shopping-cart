@@ -13,7 +13,7 @@
         function myFunction(price) {
             window.alert("Thank you for shopping with us\n\n" +
                 "-------------------------------\n" +
-                "Total: " + price + "$\n" +
+                "Total: $" + price + "\n" +
                 "-------------------------------"
             );
         }
